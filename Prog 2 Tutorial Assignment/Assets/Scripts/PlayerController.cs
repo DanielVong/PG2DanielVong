@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,24 +28,48 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Move.canceled += cntxt => move = Vector2.zero;
 
         inputAction.Player.Jump.performed += cntxt => Jump();
+        inputAction.Player.Look.performed += cntxt => rotate = cntxt.ReadValue<Vector2>();
+        inputAction.Player.Look.canceled += cntxt => rotate = Vector2.zero;
+
+        inputAction.Player.Shoot.performed += cntxt => Shoot();
+
+        rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
+
+        cameraRotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
     {
-
+        inputAction.Player.Enable();
     }
 
     private void Update()
     {
+        cameraRotation = new Vector3(cameraRotation.x + rotate.y, cameraRotation.y + rotate.x, cameraRotation.z);
+        transform.eulerAngles = new Vector3(transform.rotation.x, cameraRotation.y, transform.rotation.z);
 
+        transform.Translate(Vector3.forward * move.y * Time.deltaTime * walkSpeed, Space.Self);
+        transform.Translate(Vector3.right * move.x * Time.deltaTime * walkSpeed, Space.Self);
+    }
+    private void LateUpdate()
+    {
+        // playerCamera.transform.eulerAngles = new Vector3(cameraRotation.x, cameraRotation.y, cameraRotation.z);
+        playerCamera.transform.rotation = Quaternion.Euler(cameraRotation);
     }
 
     private void OnDisable()
     {
-
+        inputAction.Player.Disable();
     }
 
     private void Jump()
+    {
+        Debug.Log("Jump button is pressed!");
+    }
+
+    private void Shoot()
     {
 
     }
