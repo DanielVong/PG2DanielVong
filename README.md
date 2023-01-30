@@ -1,2 +1,2 @@
 # PG2DanielVong
-Programming 2 Tutorial Game
+Test third person shooter game with collectables
