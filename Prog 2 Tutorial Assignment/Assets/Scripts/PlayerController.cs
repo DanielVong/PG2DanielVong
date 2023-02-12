@@ -80,7 +80,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("Jump button is pressed!");
+        if (isGrounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+        }
     }
 
     private void Shoot()
