@@ -20,6 +20,6 @@ public class Collectables : MonoBehaviour
     }
     public void UpdateHealth()
     {
-
+        PlayerManager.playerManager.player.GetComponent<CharacterStats>().RestoreHealth(this.restoreHP);
     }
 }
