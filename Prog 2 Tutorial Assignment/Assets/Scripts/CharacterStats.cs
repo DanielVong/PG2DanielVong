@@ -81,8 +81,8 @@ public class CharacterStats : MonoBehaviour
             Debug.Log("HP: " + currentHealth + " / " + maxHealth);
         }
 
-        Debug.Log("The current health is " + currentHealth);
-        Debug.Log("End Coroutine");
+        //Debug.Log("The current health is " + currentHealth);
+        //Debug.Log("End Coroutine");
     }
 
     public virtual void Die()
