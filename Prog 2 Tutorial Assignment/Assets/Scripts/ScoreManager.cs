@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour, IDataPersistance
     }
     private void Start()
     {
-        scoreUI.text = "Score: " + totalScore;
+        scoreUI.text = "Score: " + totalScore.ToString();
     }
     public void UpdateScore(int score)
     {

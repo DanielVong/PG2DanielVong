@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         inputAction.Player.Shoot.performed += cntxt => Shoot();
 
+
+        inputAction.Player.RestoreHealth.performed += cntxt => RestoreHealth();
         // Health testing
         cs = GetComponent<CharacterStats>();
         inputAction.Player.TakeDamage.performed += cntxt => cs.TakeDamage(2);
@@ -51,7 +53,13 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         cameraRotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    void RestoreHealth()
+    {
+        if(Inventory.inventory.consumableItemsController.GetItem("Heart").GetOwnedQuantity() !=0)
+        {
+            Inventory.inventory.consumableItemsController.UseItem("Heart");
+        }
+    }
     private void OnEnable()
     {
         inputAction.Player.Enable();

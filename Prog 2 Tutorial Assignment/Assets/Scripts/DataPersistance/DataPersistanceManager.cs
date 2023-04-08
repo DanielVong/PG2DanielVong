@@ -26,6 +26,7 @@ public class DataPersistanceManager : MonoBehaviour
         {
             Debug.Log("Found more than one Data Persistance Manager in the scene");
         }
+        LoadGame();
     }
     private void Start()
     {
